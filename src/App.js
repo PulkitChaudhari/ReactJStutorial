@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import User from './User';
-import User1 from './User1';
+// import User from './User';
+// import User1 from './User1';
 import React, {useState} from 'react'
-import {Component} from 'react'
-import Student from './Student'
+// import {Component} from 'react'
+// import Student from './Student'
 
 // function App() {
 //   // you can also use a function inside a function
@@ -203,6 +203,145 @@ import Student from './Student'
 // React has 3 life cycle methods
 // 1.Mounting - Constructor is called for Component
 // 2.Updating - Rendering and Re-rendring the component
-// 3.Unmounting - Component is hidden or
+// 3.Unmounting - Component is hidden or removed
+
+// Constructor is a life cycle method and is always called when Component is created, you can use
+// this functionality to initialize States or other properties in that component.
+
+// class App extends React.Component{
+//     // constructor is always called first even before render
+//     constructor(){
+//         super();
+//         this.state={
+//             data : " Pulkit"
+//         }
+//     }
+//     render(){
+//         return(
+//                 <h1>Hello World{this.state.data}</h1>
+//         )
+//     }
+// }
+
+// Render, Life Cycle method
+// render method is first called when component is constructed and then when state/props are
+// updated.
+
+// import User3 from './User3';
+// function App(){
+// const [name,setName] = React.useState("Anil");
+//     return(
+//         <div className='App'>
+//             <h1>Render in Life cycle method</h1>
+//             <User3 name={name}/>
+//             <button onClick={()=>setName("Pulkit")}>Update Name</button>
+//         </div>
+//     )
+// }
+
+// Component did mount - has no effect of states and props
+// it is called after constructor and rendering process is done after component calling
+// *****USED FOR API Calling*****
+
+// class App extends React.Component{
+//     constructor(){
+//         super();
+//         this.state={
+//             name:"pulkit"
+//         }
+//     }
+//     componentDidMount(){
+//         console.log("componentdidmount called");
+//     }
+//     render(){
+//         console.log("render called");
+//         return(
+//             <div className='App'>
+//                 <h1>Componentdidmount - {this.state.name}</h1>
+//                 <button onClick={()=>this.setState({name:"Chaudhari"})}>Update name</button>
+//             </div>
+//         )
+//     }
+// }
+
+// componentDidUpdate
+
+// class App extends React.Component{
+//     constructor(){
+//         super();
+//         this.state={
+//             name:"Pulkit",
+//             counter:1
+//         }
+//     }
+//     componentDidUpdate(preProps,preState,snapshot){
+//         // you can call a setState inside this componentDidUpdate but make sure to use conditions
+//         // else the setState will keep on updating the component resulting in endless recursion
+//         // snapshot is bydeafult undefined 
+//         // but if getSnapshotBeforeUpdate is defined then value is available
+//         console.log("componentDidUpdate",preState);
+//     }
+//     render(){
+//         // never use setState inside render as it will result in an endless loop    
+//         return(
+//             <div className='App'>
+//                 <h1>componentDidUpdate - {this.state.name} - {this.state.counter}</h1>
+//                 <button onClick={()=>this.setState({name:"Chaudhari",counter:this.state.counter+1})}>Update name</button>
+//             </div>
+//         )
+//     }
+// }
+
+// shouldComponentUpdate
+// asks questions whether to update or not
+
+// class App extends React.Component{
+//     constructor(){
+//         super();
+//         this.state={
+//             count:0
+//         }
+//     }
+//     // by default this function returns false value
+//     // add return true statement to update the state
+//     shouldComponentUpdate(){
+//         // you can see the value being update in the line below
+//         console.warn("shouldComponentUpdate function called",this.state.count);
+//         // you can make use of conditions to allow the state to update if certain desirability is attained.
+//         // Example :-
+//         if (this.state.count > 4 && this.state.count < 10) return true;
+//         return(false); 
+//     }
+//     render(){
+//         return(
+//             <div className='App'>
+//                 <h1>shouldComponentUpdate {this.state.count} </h1>
+//                 <button onClick={()=>this.setState({count:this.state.count+1})}>Update counter</button>
+//             </div>
+//         )
+//     }
+// }
+
+// componentWillUpdate
+
+import Student1 from './Student1';
+class App extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            show:true
+        }
+    }
+    render(){
+        return(
+            <div className='App'>
+                {
+                    this.state.show ? <Student1/> : <h1>Child Component removed</h1>
+                }
+                <button onClick={()=>this.setState({show:!this.state.show})}>Toggle child component</button>
+            </div>
+        )
+    }
+}
 
 export default App;
