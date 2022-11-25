@@ -264,7 +264,7 @@ import React, {useState} from 'react'
 //     }
 // }
 
-// componentDidUpdate
+// componentDidUpdate() method allows us to execute the React code when the component is updated.
 
 // class App extends React.Component{
 //     constructor(){
@@ -291,6 +291,14 @@ import React, {useState} from 'react'
 //         )
 //     }
 // }
+
+// componentDidUpdate vs componentDidMount
+// componentDidMount() is invoked immediately after a component is mounted. 
+// Initialization that requires DOM nodes should go here. 
+// If you need to load data from a remote endpoint, this is a good place to instantiate the network request. 
+// Setting state in this method will trigger a re-rendering.
+// componentDidUpdate() is invoked immediately after updating occurs. 
+// This method is not called for the initial render.
 
 // shouldComponentUpdate
 // asks questions whether to update or not
@@ -322,26 +330,88 @@ import React, {useState} from 'react'
 //     }
 // }
 
-// componentWillUpdate
+// componentWillUpdate - The componentWillUpdate gives you control to manipulate the component just before it receives new props or state.
 
-import Student1 from './Student1';
-class App extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            show:true
-        }
-    }
-    render(){
-        return(
-            <div className='App'>
-                {
-                    this.state.show ? <Student1/> : <h1>Child Component removed</h1>
-                }
-                <button onClick={()=>this.setState({show:!this.state.show})}>Toggle child component</button>
-            </div>
-        )
-    }
+// import Student1 from './Student1';
+// class App extends React.Component{
+//     constructor(){
+//         super();
+//         this.state={
+//             show:true
+//         }
+//     }
+//     render(){
+//         return(
+//             <div className='App'>
+//                 {
+//                     this.state.show ? <Student1/> : <h1>Child Component removed</h1>
+//                 }
+//                 <button onClick={()=>this.setState({show:!this.state.show})}>Toggle child component</button>
+//             </div>
+//         )
+//     }
+// }
+
+// HOOKS in ReactJS - useState
+
+// function App(){
+//     const [data,setData] = useState("Anil")
+//     return(
+//         <div className='App'>
+//             <h1>Hooks in React</h1>
+//             <h2>{data}</h2>
+//             <button onClick={()=>setData("Sidhu")}>Update data</button>
+//         </div>
+//     )
+// }
+
+// useEffect hook - performs function of compdidmount,compdidupd,compwillmount
+
+// import {useEffect} from 'react';
+
+// function App(){
+//     const [count,setCount] = useState(0);
+//     useEffect(()=>{
+//         // alert("useEffect called")
+//     })
+//     return (
+//         <div className='App'>
+//             <h1>useEffect in React {count}</h1>
+//             <button onClick={()=>setCount(count+1)}>Update Counter</button>
+//         </div>
+//     );
+// }
+
+// useEffect with state and props
+// here useEffect is called only if the value in [] is changed.
+// import {useEffect} from 'react'; 
+// import User4 from './User4'
+
+// function App(){
+//     const [data,setData] = useState(10);
+//     const [count,setCount] = useState(100);
+//     return (
+//         <div className='App'>
+//             <User4 count={count} data={data} />
+//             <button onClick={()=>setCount(count+1)}>Update Count</button>
+//             <button onClick={()=>setData(data+1)}>Update Data</button>
+//         </div>
+//     );
+// }
+
+// Style type in ReactJS
+
+import './style.css'
+import style from './custom.module.css'
+
+function App(){
+    return (
+        <div className='App'>
+            <h1 className='primary'>Style type 1 in ReactJS</h1>
+            <h1 style={{color:'red',backgroundColor:'black'}}>Style type 2 in ReactJS</h1>
+            <h1 className={style.success}>Style type 3 in ReactJS</h1>
+        </div>
+    );
 }
 
 export default App;
