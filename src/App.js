@@ -401,15 +401,94 @@ import React, {useState} from 'react'
 
 // Style type in ReactJS
 
-import './style.css'
-import style from './custom.module.css'
+// import './style.css'
+// import style from './custom.module.css'
+
+// function App(){
+//     return (
+//         <div className='App'>
+//             <h1 className='primary'>Style type 1 in ReactJS</h1>
+//             <h1 style={{color:'red',backgroundColor:'black'}}>Style type 2 in ReactJS</h1>
+//             <h1 className={style.success}>Style type 3 in ReactJS</h1>
+//         </div>
+//     );
+// }
+
+// Installing bootstrap for ReactJS
+
+// add import 'bootstrap/dist/css/bootstrap.min.css'; to index.js if not opting for CDN(WORKs only on internet
+// connection)
+
+// import {Button,Alert} from 'react-bootstrap'
+
+// function App(){
+//     return(
+//         <div className='App'>
+//             {[
+//         'primary',
+//         'secondary',
+//         'success',
+//         'danger',
+//         'warning',
+//         'info',
+//         'light',
+//         'dark',
+//       ].map((variant) => (
+//         <Alert key={variant} variant={variant}>
+//           This is a {variant} alert—check it out!
+//         </Alert>
+//       ))}
+//         </div>
+//     );
+// }
+
+// Handle array with List
+// Array for looping can not be done inside JSX and hence map function is used.
 
 function App(){
-    return (
+    const students = ["Pulkit","Satish","Chaudhari"]
+    const studs = [
+        {name:"pulkit",email:"pulkit@email.com",phno:888},
+        {name:"satish",email:"satish@email.com",phno:100},
+        {name:"darshana",email:"darshana@email.com",phno:200}
+    ]
+    students.map((item)=>{
+        console.warn("My name is ",item)
+    })
+    for(let i = 0;i < students.length;i++){
+        console.log("My name is (for loop) ",students[i])
+    }
+    return(
         <div className='App'>
-            <h1 className='primary'>Style type 1 in ReactJS</h1>
-            <h1 style={{color:'red',backgroundColor:'black'}}>Style type 2 in ReactJS</h1>
-            <h1 className={style.success}>Style type 3 in ReactJS</h1>
+            <h1>Handle array with List</h1>
+            {/* {
+                students.map((data)=>
+                    <h1>{data}</h1>
+                )
+            } */}
+            <table border="1">
+                <tr>
+                    <td>Email</td>
+                    <td>Name</td>
+                    <td>Ph. No.</td>
+                </tr>
+            {
+                studs.map((data)=>
+                    
+                    <tr>
+                        <td>{data.email}</td>
+                        <td>{data.name}</td>
+                        <td>{data.phno}</td>
+                    </tr>
+                )
+            }
+            </table>
+            {/* // we can use for loops inside jsx */}
+            {/* {
+                for(let i = 0;i < students.length;i++){
+                    console.log("My name is (for loop) ",students[i])
+                }
+            } */}
         </div>
     );
 }
