@@ -445,52 +445,160 @@ import React, {useState} from 'react'
 // Handle array with List
 // Array for looping can not be done inside JSX and hence map function is used.
 
+// function App(){
+//     const students = ["Pulkit","Satish","Chaudhari"]
+//     const studs = [
+//         {name:"pulkit",email:"pulkit@email.com",phno:888},
+//         {name:"satish",email:"satish@email.com",phno:100},
+//         {name:"darshana",email:"darshana@email.com",phno:200}
+//     ]
+//     students.map((item)=>{
+//         console.warn("My name is ",item)
+//     })
+//     for(let i = 0;i < students.length;i++){
+//         console.log("My name is (for loop) ",students[i])
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>Handle array with List</h1>
+//             {/* {
+//                 students.map((data)=>
+//                     <h1>{data}</h1>
+//                 )
+//             } */}
+//             <table border="1">
+//                 <tr>
+//                     <td>Email</td>
+//                     <td>Name</td>
+//                     <td>Ph. No.</td>
+//                 </tr>
+//             {
+//                 studs.map((data)=>
+                    
+//                     <tr>
+//                         <td>{data.email}</td>
+//                         <td>{data.name}</td>
+//                         <td>{data.phno}</td>
+//                     </tr>
+//                 )
+//             }
+//             </table>
+//             {/* // we can use for loops inside jsx */}
+//             {/* {
+//                 for(let i = 0;i < students.length;i++){
+//                     console.log("My name is (for loop) ",students[i])
+//                 }
+//             } */}
+//         </div>
+//     );
+// }
+
+// List with bootstrap in ReactJS
+
+// import {Table} from 'react-bootstrap';
+
+// function App(){
+//     const users = [
+//         {name:'Pulkit',email:'pulkit@test.com',contact:'111'},
+//         {name:'Satish',email:'satish@test.com',contact:'222'},
+//         {name:'Chaudhari',email:'chaudhari@test.com',contact:'333'},
+//         {name:'Darshana',email:'darshana@test.com',contact:'444'}
+//     ]
+//     return(
+//         <div className='App'>
+//             <h1>List with bootstrap table</h1>
+//             <Table striped bordered hover variant='dark'>
+//                 <tbody>
+//                 <tr>
+//                     <td>Name</td>
+//                     <td>Email</td>
+//                     <td>Contact</td>
+//                 </tr>
+//                 {
+//                     users.map((item,i)=>
+//                     item.contact === '111' ? 
+//                     <tr key={i}>
+//                         <td>{item.name}</td>
+//                         <td>{item.email}</td>
+//                         <td>{item.contact}</td>
+//                     </tr> : null
+//                     )
+//                 }
+//                 </tbody>
+//             </Table>
+//         </div>
+//     )
+// }
+
+// Nested array in ReactJS
+
+import {Table} from 'react-bootstrap';
+
 function App(){
-    const students = ["Pulkit","Satish","Chaudhari"]
-    const studs = [
-        {name:"pulkit",email:"pulkit@email.com",phno:888},
-        {name:"satish",email:"satish@email.com",phno:100},
-        {name:"darshana",email:"darshana@email.com",phno:200}
+    const users = [
+        {
+            name:'Pulkit',email:'pulkit@test.com',address:[
+                {Hn:"10",City:"Mumbai",Country:'India'},
+                {Hn:"11",City:"Delhi",Country:'India'},
+                {Hn:"12",City:"Bangalore",Country:'India'},
+                {Hn:"13",City:"Kolkata",Country:'India'}
+            ]
+        },
+        {
+            name:'Darshana',email:'darshana@test.com',address:[
+                {Hn:"10",City:"Mumbai",Country:'India'},
+                {Hn:"11",City:"Delhi",Country:'India'},
+                {Hn:"12",City:"Bangalore",Country:'India'},
+                {Hn:"13",City:"Kolkata",Country:'India'}
+            ]
+        },
+        {
+            name:'Satish',email:'satish@test.com',address:[
+                {Hn:"10",City:"Mumbai",Country:'India'},
+                {Hn:"11",City:"Delhi",Country:'India'},
+                {Hn:"12",City:"Bangalore",Country:'India'},
+                {Hn:"13",City:"Kolkata",Country:'India'}
+            ]
+        }
     ]
-    students.map((item)=>{
-        console.warn("My name is ",item)
-    })
-    for(let i = 0;i < students.length;i++){
-        console.log("My name is (for loop) ",students[i])
-    }
     return(
         <div className='App'>
-            <h1>Handle array with List</h1>
-            {/* {
-                students.map((data)=>
-                    <h1>{data}</h1>
-                )
-            } */}
-            <table border="1">
-                <tr>
-                    <td>Email</td>
-                    <td>Name</td>
-                    <td>Ph. No.</td>
-                </tr>
-            {
-                studs.map((data)=>
-                    
+            <h1>List with nested array</h1>
+            <Table striped bordered hover variant = "dark">
+                <tbody>
                     <tr>
-                        <td>{data.email}</td>
-                        <td>{data.name}</td>
-                        <td>{data.phno}</td>
+                        <td>Name</td>
+                        <td>Email ID</td>
+                        <td>Address</td>
                     </tr>
-                )
-            }
-            </table>
-            {/* // we can use for loops inside jsx */}
-            {/* {
-                for(let i = 0;i < students.length;i++){
-                    console.log("My name is (for loop) ",students[i])
+                </tbody>
+                
+                <tbody>
+                {
+                    users.map((item)=>
+                        <tr>
+                            <td>{item.name}</td>
+                            <td>{item.email}</td>
+                            <td>
+                                <Table variant='dark' striped hover>
+                                <tbody>{
+                                    item.address.map((data)=>
+                                        <tr>
+                                            <td>{data.Hn}</td>
+                                            <td>{data.City}</td>
+                                            <td>{data.Country}</td>
+                                        </tr> 
+                                    )}
+                                </tbody>
+                                </Table>
+                            </td>
+                        </tr>
+                    )
                 }
-            } */}
+                </tbody>
+            </Table>
         </div>
-    );
+    )
 }
 
 export default App;
