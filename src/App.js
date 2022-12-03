@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 // import User from './User';
 // import User1 from './User1';
-import React, {useState} from 'react'
+import React, {useMemo, useState} from 'react'
 // import {Component} from 'react'
 // import Student from './Student'
 
@@ -532,71 +532,187 @@ import React, {useState} from 'react'
 
 // Nested array in ReactJS
 
-import {Table} from 'react-bootstrap';
+// import {Table} from 'react-bootstrap';
 
-function App(){
-    const users = [
-        {
-            name:'Pulkit',email:'pulkit@test.com',address:[
-                {Hn:"10",City:"Mumbai",Country:'India'},
-                {Hn:"11",City:"Delhi",Country:'India'},
-                {Hn:"12",City:"Bangalore",Country:'India'},
-                {Hn:"13",City:"Kolkata",Country:'India'}
-            ]
-        },
-        {
-            name:'Darshana',email:'darshana@test.com',address:[
-                {Hn:"10",City:"Mumbai",Country:'India'},
-                {Hn:"11",City:"Delhi",Country:'India'},
-                {Hn:"12",City:"Bangalore",Country:'India'},
-                {Hn:"13",City:"Kolkata",Country:'India'}
-            ]
-        },
-        {
-            name:'Satish',email:'satish@test.com',address:[
-                {Hn:"10",City:"Mumbai",Country:'India'},
-                {Hn:"11",City:"Delhi",Country:'India'},
-                {Hn:"12",City:"Bangalore",Country:'India'},
-                {Hn:"13",City:"Kolkata",Country:'India'}
-            ]
-        }
-    ]
+// function App(){
+//     const users = [
+//         {
+//             name:'Pulkit',email:'pulkit@test.com',address:[
+//                 {Hn:"10",City:"Mumbai",Country:'India'},
+//                 {Hn:"11",City:"Delhi",Country:'India'},
+//                 {Hn:"12",City:"Bangalore",Country:'India'},
+//                 {Hn:"13",City:"Kolkata",Country:'India'}
+//             ]
+//         },
+//         {
+//             name:'Darshana',email:'darshana@test.com',address:[
+//                 {Hn:"10",City:"Mumbai",Country:'India'},
+//                 {Hn:"11",City:"Delhi",Country:'India'},
+//                 {Hn:"12",City:"Bangalore",Country:'India'},
+//                 {Hn:"13",City:"Kolkata",Country:'India'}
+//             ]
+//         },
+//         {
+//             name:'Satish',email:'satish@test.com',address:[
+//                 {Hn:"10",City:"Mumbai",Country:'India'},
+//                 {Hn:"11",City:"Delhi",Country:'India'},
+//                 {Hn:"12",City:"Bangalore",Country:'India'},
+//                 {Hn:"13",City:"Kolkata",Country:'India'}
+//             ]
+//         }
+//     ]
+//     return(
+//         <div className='App'>
+//             <h1>List with nested array</h1>
+//             <Table striped bordered hover variant = "dark">
+//                 <tbody>
+//                     <tr>
+//                         <td>Name</td>
+//                         <td>Email ID</td>
+//                         <td>Address</td>
+//                     </tr>
+//                 </tbody>
+                
+//                 <tbody>
+//                 {
+//                     users.map((item)=>
+//                         <tr>
+//                             <td>{item.name}</td>
+//                             <td>{item.email}</td>
+//                             <td>
+//                                 <Table variant='dark' striped hover>
+//                                 <tbody>{
+//                                     item.address.map((data)=>
+//                                         <tr>
+//                                             <td>{data.Hn}</td>
+//                                             <td>{data.City}</td>
+//                                             <td>{data.Country}</td>
+//                                         </tr> 
+//                                     )}
+//                                 </tbody>
+//                                 </Table>
+//                             </td>
+//                         </tr>
+//                     )
+//                 }
+//                 </tbody>
+//             </Table>
+//         </div>
+//     )
+// }
+
+// Reuse Component in ReactJS
+
+// import User5 from './User5'
+
+// function App(){
+//     const users = [
+//         {name : 'Pulkit', email : 'pulkit@test.com', contact : '111'},
+//         {name : 'Darshana', email : 'darshana@test.com', contact : '222'},
+//         {name : 'Satish', email : 'satish@test.com', contact : '333'},
+//     ]
+//     return(
+//         <div className='App'>
+//             <h1>Reuse component in ReactJS</h1>
+//             {
+//                 users.map((item)=>
+//                     <User5 data={item}/>
+//                 )
+//             }
+//         </div>
+//     )
+// }
+
+//React Fragment - solves the problem of using <div> unnecessarily. 
+// Initially we see that without div in App we can only use single tag
+// React fragment helps tackle that problem.
+
+// import {Fragment} from 'react';
+// import Cols from './Cols';
+
+// function App() {
+//     // return(
+//     //     <Fragment>
+//     //         <h1>Hello</h1>
+//     //         <h1>Hello</h1>
+//     //     </Fragment>
+//     // )
+//     // OR
+//     // return( 
+//     //     <>
+//     //         <h1>Hello</h1>
+//     //         <h1>Hello</h1>
+//     //     </>
+//     // )
+    
+//     return(
+//         <div>
+//             <h1>React Fragment</h1>
+//             <table>
+//                 <tbody>
+//                     <tr>
+//                         <Cols />
+//                     </tr>
+//                 </tbody>
+//             </table>
+//         </div>
+//     );
+// }
+
+// Lifting stateup - i.e transferring data from child to parent
+
+// import User6 from './User6'
+// function App() {
+//     function parentAlert(data){
+//         console.log(data);
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>LIFTING STATE UP</h1>
+//             <User6 alert={parentAlert} />
+//         </div>
+//     )
+// }
+
+// Pure Component - stops re-rendering by checking if call to function has same state or not
+// this turns out to be beneficial if state doesnt change in parent so we can use child as Pure Comp to save 
+// rednering time
+
+// class App extends React.PureComponent {
+//     constructor(){
+//         super();
+//         this.state={count:1};
+//     }
+//     render(){
+//         console.warn("check-rerendering")
+//         return( 
+//             <div className='App'>
+//                 <h1>Pure Component in React {this.state.count}</h1>
+//                 <button onClick={()=>this.setState({count:1})}>Update Count</button>
+//             </div>
+//         );
+//     }
+// }
+
+// useMemo in functional Component 
+
+function App() {
+    const [count,setCount] = useState(0);
+    const [item,setItem] = useState(10);
+    const multiCountMemo = useMemo(function multiCount() {
+        console.log("multiCount called");
+        return count * 5;
+    },[count])
+    // here memo is updated only when count is called
+    // we can add Item too if we want the memo to update when item is updated
     return(
         <div className='App'>
-            <h1>List with nested array</h1>
-            <Table striped bordered hover variant = "dark">
-                <tbody>
-                    <tr>
-                        <td>Name</td>
-                        <td>Email ID</td>
-                        <td>Address</td>
-                    </tr>
-                </tbody>
-                
-                <tbody>
-                {
-                    users.map((item)=>
-                        <tr>
-                            <td>{item.name}</td>
-                            <td>{item.email}</td>
-                            <td>
-                                <Table variant='dark' striped hover>
-                                <tbody>{
-                                    item.address.map((data)=>
-                                        <tr>
-                                            <td>{data.Hn}</td>
-                                            <td>{data.City}</td>
-                                            <td>{data.Country}</td>
-                                        </tr> 
-                                    )}
-                                </tbody>
-                                </Table>
-                            </td>
-                        </tr>
-                    )
-                }
-                </tbody>
-            </Table>
+            <h1>useMemo in functional Component</h1>
+            <h2>Count : {count}</h2>
+            <h2>Count : {item}</h2>
+            <h2>{multiCountMemo}</h2>
+            <button onClick={()=>setCount(count+1)}>Update Count</button>
+            <button onClick={()=>setItem(item*10)}>Update Item</button>
         </div>
     )
 }
