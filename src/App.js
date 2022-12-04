@@ -696,23 +696,69 @@ import React, {useMemo, useState} from 'react'
 
 // useMemo in functional Component 
 
+// function App() {
+//     const [count,setCount] = useState(0);
+//     const [item,setItem] = useState(10);
+//     const multiCountMemo = useMemo(function multiCount() {
+//         console.log("multiCount called");
+//         return count * 5;
+//     },[count])
+//     // here memo is updated only when count is called
+//     // we can add Item too if we want the memo to update when item is updated
+//     return(
+//         <div className='App'>
+//             <h1>useMemo in functional Component</h1>
+//             <h2>Count : {count}</h2>
+//             <h2>Count : {item}</h2>
+//             <h2>{multiCountMemo}</h2>
+//             <button onClick={()=>setCount(count+1)}>Update Count</button>
+//             <button onClick={()=>setItem(item*10)}>Update Item</button>
+//         </div>
+//     )
+// }
+
+// Ref - use as less as possible (emergency) as it manipulates DOM and this hampers performance
+
+// class App extends React.Component {
+//     constructor(){
+//         super();
+//         this.inputRef = React.createRef();
+//     }
+//     componentDidMount() {
+//         console.log(this.inputRef.current.value="1000");
+//     }
+//     getVal() {
+//         console.log(this.inputRef.current.value);
+//         this.inputRef.current.style.color="red";
+//         this.inputRef.current.style.backgroundColor="black";
+//     }
+//     render(){
+//         return(
+//             <div className='App'>
+//                 <h1>Ref in React</h1>
+//                 <input type="text" ref={this.inputRef}></input>
+//                 <button onClick={()=>this.getVal()}>Check ref</button>
+//             </div>
+//         );
+//     }
+// }
+
+// useRef - hook for using ref in functional component
+
+import {useRef} from 'react';
+
 function App() {
-    const [count,setCount] = useState(0);
-    const [item,setItem] = useState(10);
-    const multiCountMemo = useMemo(function multiCount() {
-        console.log("multiCount called");
-        return count * 5;
-    },[count])
-    // here memo is updated only when count is called
-    // we can add Item too if we want the memo to update when item is updated
+    let inputRef = useRef(null);
+    function handleInput() {
+        console.log("function called");
+        inputRef.current.value = "100";
+        inputRef.current.focus();
+    }
     return(
         <div className='App'>
-            <h1>useMemo in functional Component</h1>
-            <h2>Count : {count}</h2>
-            <h2>Count : {item}</h2>
-            <h2>{multiCountMemo}</h2>
-            <button onClick={()=>setCount(count+1)}>Update Count</button>
-            <button onClick={()=>setItem(item*10)}>Update Item</button>
+            <h1>useRef in React</h1>
+            <input type="text" ref={inputRef}/>
+            <button onClick={handleInput}>Handle Input</button>
         </div>
     )
 }
