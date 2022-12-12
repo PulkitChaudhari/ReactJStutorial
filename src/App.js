@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 // import User from './User';
 // import User1 from './User1';
-import React, {useMemo, useState} from 'react'
+import React, {useMemo, useRef, useState} from 'react'
 // import {Component} from 'react'
 // import Student from './Student'
 
@@ -745,22 +745,78 @@ import React, {useMemo, useState} from 'react'
 
 // useRef - hook for using ref in functional component
 
-import {useRef} from 'react';
+// import {useRef} from 'react';
+
+// function App() {
+//     let inputRef = useRef(null);
+//     function handleInput() {
+//         console.log("function called");
+//         inputRef.current.value = "100";
+//         inputRef.current.focus();
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>useRef in React</h1>
+//             <input type="text" ref={inputRef}/>
+//             <button onClick={handleInput}>Handle Input</button>
+//         </div>
+//     )
+// }
+
+// forwardRef - manipulates DOM to apply change in child component from Parent component
+// Use should be minimized as it updates DOM which is not suggested. 
+
+// import { useRef } from 'react';
+// import User7 from './User7';
+
+// function App() {
+//     const inputRef = useRef(null);
+//     function updateInput() {
+//         inputRef.current.value = "1000"
+//     }
+//     return(
+//         <div className='App'>
+//             <div>forwardRef</div>
+//             <User7 ref = {inputRef} />
+//             <button onClick={updateInput}>Update Input Box</button>      
+//         </div> 
+//     );
+// }
+
+// Controlled Component - if we control input fields via state then that comp is said to be Controlled comp
+
+// function App() {
+//     let [val,setVal] = useState("");
+//     return(
+//         <div className='App'>
+//             <h1>Controlled Component</h1>
+//             <input type="text" value={val} onChange={(e)=>setVal(e.target.value)}></input>
+//         </div>
+//     );
+// }
+
+// Uncontrolled comp - input fields are handled via Javascript DOM / Ref and needs input fields in comp.
 
 function App() {
     let inputRef = useRef(null);
-    function handleInput() {
-        console.log("function called");
-        inputRef.current.value = "100";
-        inputRef.current.focus();
-    }
+    function submitForm(e) {
+        e.preventDefault()
+        console.warn("input field 1 value : ", inputRef.current.value);
+    }    
     return(
         <div className='App'>
-            <h1>useRef in React</h1>
-            <input type="text" ref={inputRef}/>
-            <button onClick={handleInput}>Handle Input</button>
+            <h1>Uncontrolled Component</h1>
+            <form onSubmit={submitForm}>
+                <input type="text" ref = {inputRef}></input>
+                <br></br>
+                <br></br>
+                <input type="text"></input>
+                <br></br>
+                <br></br>
+                <button>Submit form</button>
+            </form>
         </div>
-    )
+    );
 }
 
 export default App;
