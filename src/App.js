@@ -797,26 +797,60 @@ import React, {useMemo, useRef, useState} from 'react'
 
 // Uncontrolled comp - input fields are handled via Javascript DOM / Ref and needs input fields in comp.
 
+// function App() {
+//     let inputRef = useRef(null);
+//     function submitForm(e) {
+//         e.preventDefault()
+//         console.warn("input field 1 value : ", inputRef.current.value);
+//     }    
+//     return(
+//         <div className='App'>
+//             <h1>Uncontrolled Component</h1>
+//             <form onSubmit={submitForm}>
+//                 <input type="text" ref = {inputRef}></input>
+//                 <br></br>
+//                 <br></br>
+//                 <input type="text"></input>
+//                 <br></br>
+//                 <br></br>
+//                 <button>Submit form</button>
+//             </form>
+//         </div>
+//     );
+// }
+
+// Simple HOC - High Order Component
+// takes other component as an input and component as output
+
 function App() {
-    let inputRef = useRef(null);
-    function submitForm(e) {
-        e.preventDefault()
-        console.warn("input field 1 value : ", inputRef.current.value);
-    }    
     return(
         <div className='App'>
-            <h1>Uncontrolled Component</h1>
-            <form onSubmit={submitForm}>
-                <input type="text" ref = {inputRef}></input>
-                <br></br>
-                <br></br>
-                <input type="text"></input>
-                <br></br>
-                <br></br>
-                <button>Submit form</button>
-            </form>
+            <HOCRed cmp={Counter}/>
+            <h1>This is my Heading tag</h1>
         </div>
     );
 }
+
+function HOCRed(props) {
+    return(
+        <div className='HOCRed'>
+            <props.cmp/>
+            <Counter />
+        </div>
+    );
+}
+
+function Counter () {
+    const [count,setCount] = useState(0);
+    return (
+        <div className='Counter'>
+            <h3>Simple HOC - {count}</h3> 
+            <button onClick={()=>setCount(count+1)}> Update </button>
+        </div>
+    );
+}
+
+
+
 
 export default App;
