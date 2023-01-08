@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 // import User from './User';
 // import User1 from './User1';
-import React, {useMemo, useRef, useState} from 'react'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 // import {Component} from 'react'
 // import Student from './Student'
 
@@ -822,35 +822,323 @@ import React, {useMemo, useRef, useState} from 'react'
 // Simple HOC - High Order Component
 // takes other component as an input and component as output
 
-function App() {
-    return(
-        <div className='App'>
-            <HOCRed cmp={Counter}/>
-            <h1>This is my Heading tag</h1>
-        </div>
-    );
+// function App() {
+//     return(
+//         <div className='App'>
+//             <HOCRed cmp={Counter}/>
+//             <h1>This is my Heading tag</h1>
+//         </div>
+//     );
+// }
+
+// function HOCRed(props) {
+//     return(
+//         <div className='HOCRed'>
+//             <props.cmp/>
+//             <Counter />
+//         </div>
+//     );
+// }
+
+// function Counter () {
+//     const [count,setCount] = useState(0);
+//     return (
+//         <div className='Counter'>
+//             <h3>Simple HOC - {count}</h3> 
+//             <button onClick={()=>setCount(count+1)}> Update </button>
+//         </div>
+//     );
+// }
+
+// Routing in ReactJS
+
+// import {BrowserRouter as  Router,Link,Route,Routes} from 'react-router-dom'
+// import Nav from './Nav'
+// import Home from './Home'
+// import About from './About'
+
+// function App() {
+//     return (
+//         <div className='App'>
+//                 <h1>Routing in React</h1>
+//                 <Nav/>
+//                 <Routes>
+//                 <Route exact path="/home" element={<Home />}></Route>
+//                 <Route exact path="/about" element={<About/>}></Route>
+//                 </Routes> 
+//         </div>
+//     );
+// }
+
+// Adding 404 error page 
+
+// import {BrowserRouter as  Router,Link,Route,Routes} from 'react-router-dom'
+// import Home from './Home'
+// import About from './About'
+// import PageNotFound from './pageNotFound';
+
+// function App() {
+//     return (
+//         <div className='App'>
+//                 <h1>Routing in React</h1>
+//                 <Link to="/home">Home Page</Link>
+//                 <br></br>
+//                 <Link to="/about">About Page</Link>
+//                 <br></br>
+//                 <Link to="/login">Login Page</Link>
+//                 <Routes>
+//                 <Route exact path="/home" element={<Home />}></Route>
+//                 <Route exact path="/about" element={<About/>}></Route>
+//                 <Route path="*" element={<PageNotFound/>}></Route>
+//                 </Routes> 
+//         </div>
+//     );
+// }
+
+// Dynamic Routing - changes based on input data given
+
+// import { BrowserRouter as Router, Link,Route} from 'react-router-dom';
+// import User8 from './User8';
+
+// function App() {
+//     let users = [
+//         {id:1,name:'pulkit',email:'pulkit@gmail.com'},
+//         {id:2,name:'satish',email:'satish@gmail.com'},
+//         {id:3,name:'darshana',email:'darshana@gmail.com'},
+//     ]
+//     return (
+//         <div className='App'>
+//             <Router>
+//                 <h1>React Dynamic Routing</h1>
+//                 {
+//                     users.map((item)=>
+//                         <div>
+//                             <Link to={"/user/"+item.id}>{item.name}</Link>
+//                         </div>
+//                     ) 
+//                 }
+//                 <Route path="/user/:id"><User8/></Route>
+//             </Router>
+//         </div>
+//     );
+// }
+
+// Get API
+
+// function App() {
+//     const [data,setData] = useState([]);
+//     useEffect(()=>{
+//         fetch("http://localhost:4000/todo").then((result)=>{
+//             result.json().then((resp)=>{
+//                 console.warn("result",resp);
+//                 setData(resp);
+//             })
+//         })
+//     },[])
+
+//     return(
+//         <div className='App'>
+//             <h1> Get API call</h1>
+//             <table border="1">
+//                 <tr>
+//                     <td>ID</td>
+//                     <td>First Name</td>
+//                     <td>Last Name</td>
+//                     <td>Email</td>
+//                 </tr>
+//                 {
+//                     data.map((item)=>
+//                         <tr>
+//                             <td>{item.id}</td>
+//                             <td>{item.first_name}</td>
+//                             <td>{item.last_name}</td>
+//                             <td>{item.email}</td>
+//                         </tr>
+//                     )
+//                 }
+//             </table>
+//         </div>
+//     );
+// }
+
+// POST API
+
+// function App() {
+//     const [id,setID] = useState("");
+//     const [firstName,setFirstName] = useState("");
+//     const [lastName,setLastName] = useState("");
+//     const [email,setEmail] = useState("");
+//     function saveUser() {
+//         const data = {id,firstName,lastName,email};
+//         console.warn({id,firstName,lastName,email});
+//         fetch("http://localhost:4000/todo",{
+//             method:'POST',
+//             headers:{
+//                 'Accept':'application/json',
+//                 'Content-Type':'application/json'
+//             },
+//             body:JSON.stringify(data)
+//         }).then((result)=>{
+//             console.warn("result",result);
+//         })
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>POST API Method</h1>
+//             <input type="text" name = "id" value={id} onChange={(e)=>{setID(e.target.value)}}/><br/>
+//             <br/>
+//             <input type="text" name = "first_name" value={firstName} onChange={(e)=>{setFirstName(e.target.value)}}/><br/>
+//             <br/>
+//             <input type="text" name = "last_name" value={lastName} onChange={(e)=>{setLastName(e.target.value)}}/><br/>
+//             <br/>
+//             <input type="text" name = "email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/><br/>
+//             <br/>
+//             <button type="button" onClick={saveUser}>Save button</button>
+//         </div>
+//     );
+// }
+
+// DELETE API and UPDATE API
+
+// function App() {
+
+//     const [data,setData] = useState([]);
+//     const [id,setId] = useState("");
+//     const [firstName,setFirstName] = useState("");
+//     const [lastName,setLastName] = useState("");
+//     const [email,setEmail] = useState("");
+
+//     useEffect(()=>{
+//         getList();
+//     },[])
+//     function getList() {
+//         fetch("http://localhost:4000/todo").then((result)=>{
+//             result.json().then((resp)=>{
+//                 setData(resp);
+//                 setFirstName(resp[0].first_name);
+//                 setLastName(resp[0].last_name);
+//                 setEmail(resp[0].email);
+//                 setId(resp[0].id);
+//             })
+//         })
+//     }
+//     function deleteUser(id) {
+//         fetch('http://localhost:4000/todo/'+id,{
+//             method:'DELETE'
+//         }).then((result)=>{
+//             result.json().then((resp)=>{
+//                 console.warn(resp); 
+//                 getList();
+//             })
+//         })
+//         getList();
+//     }
+//     function selectUser(id){
+//         const item = data[id-1];
+//         setId(item.id);
+//         setFirstName(item.first_name);
+//         setLastName(item.last_name);
+//         setEmail(item.email);
+//     }
+//     function updateUser() {
+//         const first_name =firstName;
+//         const last_name =lastName;
+//         let item = {id,first_name,last_name,email};
+//         fetch('http://localhost:4000/todo/'+id,{
+//             method:'PUT',
+//             headers: {
+//                 'Accept':'application/json',
+//                 'Content-Type':'application/json'
+//             },
+//             body:JSON.stringify(item),
+//         }).then((result)=>{
+//             result.json().then((resp)=>{
+//                 console.warn(resp); 
+//                 getList();
+//             })
+//         })
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>Get API call</h1>
+//             <table border="1" style={{float:'left'}}>
+//                 <tbody>
+//                 <tr>
+//                     <td>ID</td>
+//                     <td>First Name</td>
+//                     <td>Last Name</td>
+//                     <td>Email</td>
+//                     <td>Operations</td>
+//                 </tr>
+//                 {
+//                     data.map((item)=>
+//                         <tr>
+//                             <td>{item.id}</td>
+//                             <td>{item.first_name}</td> 
+//                             <td>{item.last_name}</td>
+//                             <td>{item.email}</td>
+//                             <td><button onClick={()=>deleteUser(item.id)}>Delete</button></td>
+//                             <td><button onClick={()=>selectUser(item.id)}>Update</button></td>
+//                         </tr>
+//                     )
+//                 }
+//                 </tbody>
+//             </table>
+//             <div>
+//             <br/>
+//                 <input type="text" value={firstName} onChange={(e) => { setFirstName(e.target.value) }}/><br/><br/>
+//                 <input type="text" value={lastName} onChange={(e) => { setLastName(e.target.value) }}/><br/><br/>
+//                 <input type="text" value={email} onChange={(e) => { setEmail(e.target.value) }}/><br/><br/>
+//                 <button onClick={updateUser}> Update User</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+// Access previous state value 
+
+// function App() {
+//     const [count,setCount] = useState(1);
+//     function updateCounter() {
+//         let rand = Math.floor(Math.random()*10);
+//         setCount((prev)=>{
+//             console.warn(prev);
+//             if (prev-rand > 5) alert("topup");
+//             return rand;
+//         });
+//     }
+//     return(
+//         <div className='App'>
+//             <h1>Count : {count}</h1>
+//             <button onClick={updateCounter}>Click Me to update counter</button>
+//         </div>
+//     );
+// }
+
+// Context API - used to send data from one component to another on the same page
+
+import { CommonContext } from './components/CommonContext';
+
+class App extends React.Component{
+    constructor() {
+        super()
+        this.state={
+            color:"null",
+            updateColor:this.updateColor
+        }
+        this.updateColor=()=>{
+            this.setState({
+                color:'red'
+            })
+        }
+    }
+    render() {
+        return(
+            <CommonContext.Provider value={this.state}>
+                <h1>Hello this is for Context API</h1>
+            </CommonContext.Provider>
+        );
+    }
 }
-
-function HOCRed(props) {
-    return(
-        <div className='HOCRed'>
-            <props.cmp/>
-            <Counter />
-        </div>
-    );
-}
-
-function Counter () {
-    const [count,setCount] = useState(0);
-    return (
-        <div className='Counter'>
-            <h3>Simple HOC - {count}</h3> 
-            <button onClick={()=>setCount(count+1)}> Update </button>
-        </div>
-    );
-}
-
-
-
 
 export default App;
